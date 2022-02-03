@@ -13,3 +13,4 @@ Development workload**
 
 ##Helpful Tutorials
 - [Getting started with ASP.NET Core MVC and EF Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6.0_)
+- [Getting started with Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/get-started/overview/first-app?tabs=netcore-cli)
