@@ -6,4 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\images\deathloop.jfif" />
+    <None Include="wwwroot\css\images\ratchet.webp" />
+    <None Include="wwwroot\css\images\returnal.webp" />
+    <None Include="wwwroot\css\images\spiderman.jpg" />
+  </ItemGroup>
+
 </Project>
