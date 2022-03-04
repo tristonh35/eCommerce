@@ -22,14 +22,14 @@ namespace eCommerce.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Game g)
+        public async Task<IActionResult> Create(Game g)
         {
             // If everything is valid in the game class
             // add and save changes
             if(ModelState.IsValid)
             {
                 _context.Games.Add(g); //Prepares insert
-                _context.SaveChanges(); //Execute pending insert
+                await _context.SaveChangesAsync(); //Execute pending insert
                 ViewData["Message"] = $"{g.Title} was added successfully!";
 
                 return View();
