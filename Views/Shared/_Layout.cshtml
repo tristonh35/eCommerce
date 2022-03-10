@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor _httpContext
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,9 +30,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Games" asp-action="Index">Game Catalog</a>
                         </li>
-                         <li class="nav-item">
+                        @if (_httpContext.HttpContext.Session.GetString("Email") != null)
+                        {
+                            <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Register">Register</a>
-                        </li>
+                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Login">Login</a>
+                            </li>
+                        } 
+                        else
+                        {
+                            <li>
+                                <p>Hello @_httpContext.HttpContext.Session.GetString("Email")</p>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>
