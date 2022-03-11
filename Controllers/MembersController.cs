@@ -29,7 +29,8 @@ namespace eCommerce.Controllers
                 };
                 _context.Members.Add(newMember);
                 await _context.SaveChangesAsync();
-
+                //This automatically logs the user in to their new account once they are done registering       
+                LogUserIn(newMember.Email);
                 return RedirectToAction("Index", "Home");
             }
             return View(regModel);
@@ -51,7 +52,7 @@ namespace eCommerce.Controllers
                 // If exists, send to homepage
                 if(m != null)
                 {
-                    HttpContext.Session.SetString("Email", loginModel.Email);
+                    LogUserIn(loginModel.Email);
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError(String.Empty, "Credentials not found");
@@ -59,6 +60,17 @@ namespace eCommerce.Controllers
             }
            // Return page if no record found
             return View(loginModel);
+        }
+
+        private void LogUserIn(string email)
+        {
+            HttpContext.Session.SetString("Email", email);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
     }
