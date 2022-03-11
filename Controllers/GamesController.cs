@@ -22,11 +22,22 @@ namespace eCommerce.Controllers
             const int PageOffset = 1; // Need a page offset to use current page and figure out, num games to skip
             // Set current page to id if it has a value, otherwise use 1.
             int currPage = id ?? 1; // Set currPage to id if it has a valuem otherwise use 1
+
+            // Counts the number of games in our database
+            int totalNumOfProducts = await _context.Games.CountAsync();
+
+            // Determines the max amount of pages needed based on the number of games in the database 
+            double maxNumPages = Math.Ceiling((double)totalNumOfProducts / NumGamesToDisplayPerPage);
+           
+            int lastPage = Convert.ToInt32(maxNumPages); //Rounding pages up, to next whole page number
+
+
             List<Game> games = await (from game in _context.Games 
                                      select game)
                                      .Skip(NumGamesToDisplayPerPage * (currPage - PageOffset))
                                      .Take(NumGamesToDisplayPerPage).ToListAsync();
-            return View(games);
+            GameCatalogViewModel catalogModel = new(games, lastPage, currPage);
+            return View(catalogModel); 
         }
 
         [HttpGet]
